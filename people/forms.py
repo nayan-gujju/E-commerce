@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import MyUser
 
 class CustomerForm(UserCreationForm):   
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
-        model = User    
+        model = MyUser    
         fields = ['username', 'first_name', 'last_name', 'email','customername', 'mobile','address1', 'address2', 'city', 'state', 'pin_code']
 
     # def save(self, commit=True):
@@ -24,7 +24,7 @@ class ShopForm(UserCreationForm):
     last_name = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = MyUser
         fields = ['username', 'first_name', 'last_name', 'email','sellername','mobile']
 
     def save(self, commit=True):

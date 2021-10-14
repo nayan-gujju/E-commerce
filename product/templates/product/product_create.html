@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-    <form enctype="multipart/form-data" action="" method="POST" mu>
+    <form  action="" method="POST">
     {% csrf_token %}
         {% for fm in form %}
         {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>

@@ -1,27 +1,46 @@
 {% extends 'base.html' %}
+{% load mathfilters %}
 
 {% block title %}
     Product Detail
 {% endblock title %}
 
 {% block content %}
-    <h1>Details Page</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Discount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{products.id}}</td>
-                <td>{{products.title}}</td>
-                <td>{{products.price}}</td>
-                <td>{{products.discount_price}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h3>Details Page</h3>
+    <div class="row">
+        <div class="col">
+            <img src="{{product.image.url}}" class="rounded float-start" width=150px, height=250px alt="...">
+        </div>
+        <div class=" col">
+            <p>{{product.title}}</p>
+            <p class="text-muted">M.R.P:-{{product.price}}</p>
+            <p>Rs:-{{product.price|sub:product.discount_price}}</p>
+            <p>You Save:-{{product.discount_price}}</p>
+            <pre>{{product.description}}</pre>  
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    {% comment %} <h5 class="card-title"> with exchange</h5> {% endcomment %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick="{% url 'home' %}">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            With Exchange
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Without Exchange
+                        </label>
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
