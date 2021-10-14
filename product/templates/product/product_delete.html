@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Delete
+{% endblock title %}
+
+{% block content %}
+    <h2>Are You sure..??</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+        <a href="{% url 'list' %}" class="btn btn-sm btn-primary ">Cancel</a>
+    </form>
+{% endblock content %}

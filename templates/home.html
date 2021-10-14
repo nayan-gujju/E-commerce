@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+    {% for product in products %}
+    <div class="container">
+        <div class="card mb-2" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if user.is_seller %}
+                        <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+                    {% else %}
+                        <a href="{% url 'detail' product.id %}"><img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..."></a>
+                    {% endif %}
+                    {% comment %} <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..."> {% endcomment %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.title}}</h5>
+                        <p class="card-text">price:-{{product.price}}</p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    {% endfor %}
+{% endblock content %}

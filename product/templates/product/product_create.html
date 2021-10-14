@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Product Add
+{% endblock title %}
+
+{% block content %}
+    <form enctype="multipart/form-data" action="" method="POST" mu>
+    {% csrf_token %}
+        {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+        {% endfor %}    
+        <input type="submit" value="Submit">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %} {{message.tag}} {% endif %}
+                {{message}} 
+            {% endfor %}
+        {% endif %}
+    </form>
+{% endblock content %}

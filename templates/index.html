@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    index
+{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'customer' %}" class='btn btn-primary'>Customer</a>
+    <a href="{% url 'shop' %}" class='btn btn-primary'>Shop</a>
+{% endblock content %}
