@@ -28,6 +28,11 @@ urlpatterns = [
     path('index/',TemplateView.as_view(template_name='index.html'), name='index'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('accounts/password_reset', auth_views.PasswordResetView.as_view(template_name='forgot_password.html'), name='forgot'),
+    path('accounts/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset.html')
+    , name='password_reset_confirm'),
+    path('accounts/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
+    path('accounts/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_complete.html'), name='password_reset_complete'),
 ]
 
 if settings.DEBUG:

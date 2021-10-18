@@ -1,55 +1,36 @@
-from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from .models import Product 
+from .models import Product, Photos
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView,CreateView
 from django.views.generic.detail import DetailView
 from .forms import ProductForm
-from django.views.generic.base import View
-# Create your views here.
-# I have changed detail page and add functionlaity in demo project.
-# I have learned One to Many Relationship model in django.
-#I have learned math filters in django template language.
-class product_create(View):
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# Create your views here.   
+
+class product_create(LoginRequiredMixin, CreateView):
     model = Product
+    template_name = "product/product_create.html"
     form_class = ProductForm
-    template_name = 'product/product_create.html'
+    success_url = '/'
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        print("=======", request.POST['image'])
-        # print("--------", form['title'].value)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-
-        return render(request, self.template_name, {'form': form})        
-
-# def show(request):
-#     if request.method == 'POST':
-#         fm = StudentInfo(request.POST)
-#         if fm.is_valid():
-#             nm = fm.cleaned_data['name']
-#             em = fm.cleaned_data['email']
-#             pa = fm.cleaned_data['password']
-#             print(nm)
-#             print(em)
-#             print(pa)
-#             reg = User(name=nm, email=em, password=pa)
-#             reg.save()
-#     else:
-#         fm = StudentInfo()
-
-#     return render(request, 'enroll/home.html' , {'form':fm})
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
 
 class Product_list(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+
+class ProductList(ListView):
+    model = Product
+    template_name='product/product_list.html'
+    context_object_name = 'context'
+    
+    def get_queryset(self):
+        return Product.objects.filter(seller = self.request.user)
+
 
 class Product_update(UpdateView):
     model = Product
@@ -66,3 +47,9 @@ class Product_detail(DetailView):
     model = Product
     template_name = "product/product_detail.html"
     context_object_name = 'product'
+
+class ImageUpdate(UpdateView):
+    model = Photos
+    fields = ('image2','image3','image4','image5')
+    template_name = 'product/images_create.html'
+    success_url = '/product/list'

@@ -8,8 +8,11 @@
 {% block content %}
     <h3>Details Page</h3>
     <div class="row">
-        <div class="col">
-            <img src="{{product.image.url}}" class="rounded float-start" width=150px, height=250px alt="...">
+        <div class="col ">
+            <img src="{{product.image.url}}" class="rounded float-start" width=150px, height=250px alt="...">   
+            {% for photo in photos %}
+                <img src="{{photo.image2.url}}" class="rounded float-start" width=150px, height=250px alt="...">   
+            {% endfor %}
         </div>
         <div class=" col">
             <p>{{product.title}}</p>
@@ -22,7 +25,6 @@
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    {% comment %} <h5 class="card-title"> with exchange</h5> {% endcomment %}
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick="{% url 'home' %}">
                         <label class="form-check-label" for="flexRadioDefault1">

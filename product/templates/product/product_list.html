@@ -14,24 +14,24 @@
             <th class="col">Discount</th>
             <th class="col">Description</th>
             <th class="col">Image</th>
-            {% comment %} <th>Images</th> {% endcomment %}
             <th>Operations
                 <small class="">
-                    <a href="{% url 'create' %}" class="btn btn-dark btn-sm ">Add</a>
+                    <a href="{% url 'create' %}" class="btn btn-dark btn-sm ">Add Items</a>
                 </small>
             </th>
         </thead>
         <tbody>
-            {% for product in products %}
+            {% for product in context %}
                 <tr>
                     <td class="col-1">{{product.id}}</td>
                     <td class="col-1">{{product.title}}</td>
                     <td class="col-1">{{product.price}}</td>
                     <td class="col-1">{{product.discount_price}}</td>
-                    <td class="col-5">{{product.description}}</td>
-                    <td class="col"><img src="{{product.image.url}}" width=100px height=100px  alt=""></td>
+                    <td class="col-1">{{product.description}}</td>
+                    <td class="col-1"><img src="{{product.image.url}}" width=100px height=100px  alt=""></td>
                     <td class="col-2">
-                        <a href="{% url 'update' product.id %}" class="btn btn-sm btn-secondary ">Update</a>&nbsp;
+                        <a href="{% url 'imagecreate' product.id %}" class="btn btn-secondary btn-sm ">Add Images</a>
+                        <a href="{% url 'update' product.id %}" class="btn btn-sm btn-primary ">Update</a>&nbsp;
                         <a href="{% url 'delete' product.id %}" class="btn btn-sm btn-danger ">Delete</a>
                     </td>
                 </tr>

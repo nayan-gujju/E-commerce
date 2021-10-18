@@ -15,13 +15,12 @@
                     {% else %}
                         <a href="{% url 'detail' product.id %}"><img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..."></a>
                     {% endif %}
-                    {% comment %} <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..."> {% endcomment %}
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{product.title}}</h5>
                         <p class="card-text">price:-{{product.price}}</p>
-                        <p class="card-text">Seller Name:-{{product.seller.sellername}}</p>
+                        <p class="card-text">Seller Name:-{{product.seller}}</p>
                     </div>
                 </div>
             </div>  

@@ -10,8 +10,10 @@
         {% for fm in form %}
         {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
         {% endfor %}
-        <input type="submit" value="Submit">
-        <a href="{% url 'index' %}">SignUp</a>
+        <input type="submit" value="Login"> <a href="{% url 'forgot' %}">Forgot Password..?</a> <br>
+        <div class="sign">
+            <a href="{% url 'index' %}">SignUp</a>
+        </div>
         {% if messages %}
             {% for message in messages %}
                 {% if message.tags %} {{message.tag}} {% endif %}
