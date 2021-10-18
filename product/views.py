@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from .forms import ProductForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# Create your views here.   
+# Create your views here. 
 
 class product_create(LoginRequiredMixin, CreateView):
     model = Product
