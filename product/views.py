@@ -3,7 +3,7 @@ from .models import Product, Photos
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView,CreateView
 from django.views.generic.detail import DetailView
-from .forms import ProductForm
+from .forms import ProductForm, ImageForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here. 
@@ -48,8 +48,13 @@ class Product_detail(DetailView):
     template_name = "product/product_detail.html"
     context_object_name = 'product'
 
+    def get_context_data(self,**kwargs):
+        context = super(Product_detail, self).get_context_data(**kwargs)
+        context['photos'] = Photos.objects.filter(photo_id=self.kwargs['pk'])
+        return context
+
 class ImageUpdate(UpdateView):
     model = Photos
-    fields = ('image2','image3','image4','image5')
-    template_name = 'product/images_create.html'
-    success_url = '/product/list'
+    form_class = ImageForm
+    template_name = 'product/images_create.html'   
+    success_url = '/'

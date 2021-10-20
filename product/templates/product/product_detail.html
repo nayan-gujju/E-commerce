@@ -9,9 +9,30 @@
     <h3>Details Page</h3>
     <div class="row">
         <div class="col ">
-            <img src="{{product.image.url}}" class="rounded float-start" width=150px, height=250px alt="...">   
+            <a href="{{product.image.url}}" target= _blank>
+                    <img src="{{product.image.url}}" class="rounded float-start" width=150px, height=250px alt="..." >
+                    </a>   
             {% for photo in photos %}
-                <img src="{{photo.image2.url}}" class="rounded float-start" width=150px, height=250px alt="...">   
+                {% if photo.image2 %}
+                <a href="{{photo.image2.url}}" target= _blank>
+                    <img src="{{photo.image2.url}}" class="rounded float-start" width=150px, height=250px alt="..." >
+                    </a>   
+                {% endif %}
+                {% if photo.image3 %}
+                <a href="{{photo.image3.url}}" target= _blank>
+                    <img src="{{photo.image3.url}}" class="rounded float-start" width=150px, height=250px alt="..." >
+                    </a>   
+                {% endif %}
+                {% if photo.image4 %}
+                <a href="{{photo.image4.url}}" target= _blank>
+                    <img src="{{photo.image4.url}}" class="rounded float-start" width=150px, height=250px alt="..." >
+                    </a>   
+                {% endif %}
+                {% if photo.image5 %}
+                <a href="{{photo.image5.url}}" target= _blank>
+                    <img src="{{photo.image5.url}}" class="rounded float-start" width=150px, height=250px alt="..." >
+                    </a>   
+                {% endif %}
             {% endfor %}
         </div>
         <div class=" col">

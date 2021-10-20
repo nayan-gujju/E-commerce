@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from people.models import MyUser
+
 # Create your models here.
 
 class Product(models.Model):
@@ -12,14 +12,17 @@ class Product(models.Model):
     seller = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.title
+        return self.title   
 
     def get_absolute_url(self):
         return reverse("home")
     
 class Photos(models.Model):
-    titlephoto = models.ForeignKey(Product, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     image2 = models.ImageField(upload_to='images/', blank=True)
     image3 = models.ImageField(upload_to='images/', blank=True)
-    image4 = models.ImageField(upload_to='images/', blank=True)
+    image4 = models.ImageField(upload_to='images/', blank=True) 
     image5 = models.ImageField(upload_to='images/', blank=True) 
+
+    class Meta:
+        verbose_name_plural = 'Photo'
