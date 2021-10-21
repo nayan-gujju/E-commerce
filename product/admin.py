@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Photos, Product
+from .models import ProductImages, Product
 # Register your models here.
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id','title','price', 'seller','discount_price', 'description', 'image')
 
-@admin.register(Photos)
+@admin.register(ProductImages)
 class PhotosAdmin(admin.ModelAdmin):
-    list_display = ('id','image2','image3','image4','image5')
+    list_display = ('id','image')

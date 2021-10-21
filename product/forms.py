@@ -1,12 +1,21 @@
 from django import forms
-from .models import Product, Photos
+from .models import Product, ProductImages
 
 class ProductForm(forms.ModelForm):
+    
+    more_images = forms.FileField(required=False, widget=forms.FileInput(
+        attrs={
+            "class": 'form-control',
+            "multiple": True,
+        }
+    ))
+
     class Meta:
         model = Product
         fields = ('title', 'price', 'discount_price', 'description', 'image')
-
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = Photos
-        fields = ('image2','image3','image4','image5')
+        widgets = {
+            "title":forms.TextInput(attrs={
+                "class": 'form-control',
+                "placeholder": "Enter the product title here..."
+            })
+        }
