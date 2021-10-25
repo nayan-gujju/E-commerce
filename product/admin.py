@@ -8,4 +8,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductImages)
 class PhotosAdmin(admin.ModelAdmin):
-    list_display = ('id','image')
+    list_display = ('id','image', 'product')

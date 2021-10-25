@@ -30,7 +30,7 @@
                     <td class="col-1">{{product.description}}</td>
                     <td class="col-1"><img src="{{product.image.url}}" width=100px height=100px  alt=""></td>
                     <td class="col-2">
-                        <a href="#" class="btn btn-secondary btn-sm ">Add Images</a>
+                        <a href="{% url 'imageupdate' product.id %}" class="btn btn-secondary btn-sm ">Update Images</a>
                         <a href="{% url 'update' product.id %}" class="btn btn-sm btn-primary ">Update</a>&nbsp;
                         <a href="{% url 'delete' product.id %}" class="btn btn-sm btn-danger ">Delete</a>
                     </td>

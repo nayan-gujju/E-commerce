@@ -6,8 +6,7 @@ from django.views.generic.detail import DetailView
 from .forms import ProductForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# Create your views here. 
-
+# Create your views here.
 class product_create(LoginRequiredMixin, CreateView):
     model = Product
     template_name = "product/product_create.html"
@@ -15,10 +14,8 @@ class product_create(LoginRequiredMixin, CreateView):
     success_url = '/'
 
     def form_valid(self, form):
-        form.instance.seller = self.request.user
         images = self.request.FILES.getlist("more_images")
-        print("=========>>>", type(self.request.user))
-        print("<<<=========>>>", type(form.instance.seller))
+        form.instance.seller = str(self.request.user)
         p = form.save()
         for i in images:
             ProductImages.objects.create(product=p, image=i)
@@ -33,7 +30,6 @@ class ProductList(ListView):
     model = Product
     template_name='product/product_list.html'
     context_object_name = 'context'
-    print("-------->>>>>", type(context_object_name))
     def get_queryset(self):
         return Product.objects.filter(seller = self.request.user)
 
@@ -56,11 +52,11 @@ class Product_detail(DetailView):
 
     def get_context_data(self,**kwargs):
         context = super(Product_detail, self).get_context_data(**kwargs)
-        context['photos'] = ProductImages.objects.filter(photo_id=self.kwargs['pk'])
+        context['photos'] = ProductImages.objects.filter(product=self.kwargs['pk'])
         return context
 
-# class ImageUpdate(UpdateView):
-#     model = ProductImages
-#     form_class = ImageForm
-#     template_name = 'product/images_create.html'   
-#     success_url = '/'
+class ImagesUpdate(UpdateView):
+    model = ProductImages
+    fields = ("image", "image", "product")
+    template_name = 'product/product_update.html'
+    success_url = "/product/list"
